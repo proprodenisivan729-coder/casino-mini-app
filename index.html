@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { background-color: var(--tg-theme-bg-color, #1c1c1e); color: var(--tg-theme-text-color, #ffffff); font-family: sans-serif; padding: 20px; text-align: center; }
+        button { background-color: var(--tg-theme-button-color, #3390ec); color: var(--tg-theme-button-text-color, #ffffff); border: none; padding: 15px 30px; border-radius: 10px; font-size: 16px; margin: 10px; cursor: pointer; width: 100%; }
+        .balance { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="balance">🎰 Casino Mini App</div>
+    <p>Это демонстрация интеграции.</p>
+    
+    <button onclick="sendDeposit()">💳 Тестовый депозит 100 ⭐</button>
+    <button onclick="sendWin()">🎉 Тестовый выигрыш 50 ⭐</button>
+    <button onclick="closeApp()">❌ Закрыть</button>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        function sendData(data) {
+            tg.sendData(JSON.stringify(data));
+            // tg.close(); // Раскомментируйте, если хотите закрывать приложение сразу после действия
+        }
+
+        function sendDeposit() {
+            sendData({ action: "deposit", amount: 100 });
+            alert("Данные о депозите отправлены боту!");
+        }
+
+        function sendWin() {
+            sendData({ action: "game_win", amount: 50 });
+            alert("Данные о выигрыше отправлены боту!");
+        }
+
+        function closeApp() {
+            tg.close();
+        }
+    </script>
+</body>
+</html>
